@@ -3,6 +3,7 @@ package com.ederson.carteira.service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.ederson.carteira.dto.AtivoDto;
 import com.ederson.carteira.dto.DetalheAtivoDto;
 import com.ederson.carteira.dto.TicketDto;
+import com.ederson.carteira.exceptions.AdministradoraNaoEncontradaException;
+import com.ederson.carteira.exceptions.CarteiraException;
 import com.ederson.carteira.factory.AtivoFactory;
 import com.ederson.carteira.model.Administradora;
 import com.ederson.carteira.model.Ativo;
@@ -53,8 +56,13 @@ public class AtivoService {
 		return ativoFactory;
 	}
 
-	public Ativo incluir(AtivoDto ativoDto) {
-		Administradora administradora = administradoraRepository.findByCnpj(ativoDto.getAdministradora().getCnpj());
+	public Ativo incluir(AtivoDto ativoDto) throws CarteiraException {
+		Administradora administradora = administradoraRepository.findByCnpj(ativoDto.getCnpjAdministradora());
+		if (Objects.isNull(administradora)) {
+			throw new AdministradoraNaoEncontradaException(
+					String.format("Administradora com cnpj [%s] não encontrada.", ativoDto.getCnpjAdministradora()));
+		}
+
 		Ativo ativo = getAtivoFactory().toAtivo(ativoDto);
 		ativo.setAdministradora(administradora);
 		return ativoRepository.save(ativo);

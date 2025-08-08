@@ -1,5 +1,6 @@
 package com.ederson.carteira.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ederson.carteira.dto.AtivoDto;
 import com.ederson.carteira.dto.DetalheAtivoDto;
 import com.ederson.carteira.dto.TicketDto;
+import com.ederson.carteira.exceptions.CarteiraException;
 import com.ederson.carteira.model.Ativo;
 import com.ederson.carteira.service.AtivoService;
 
@@ -48,9 +50,9 @@ public class AtivoController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<?> incluir(@RequestBody AtivoDto ativoDto) {
-		ativoService.incluir(ativoDto);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+	public ResponseEntity<?> incluir(@RequestBody AtivoDto ativoDto) throws CarteiraException {
+		Ativo ativo = ativoService.incluir(ativoDto);
+		return ResponseEntity.created(URI.create("/" + ativo.getId())).build();
 	}
 
 }

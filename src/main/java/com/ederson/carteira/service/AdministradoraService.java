@@ -1,12 +1,15 @@
 package com.ederson.carteira.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ederson.carteira.dto.AdministradoraDto;
+import com.ederson.carteira.exceptions.AdministradoraJaCadastradaException;
+import com.ederson.carteira.exceptions.CarteiraException;
 import com.ederson.carteira.factory.AdministradoraFactory;
 import com.ederson.carteira.model.Administradora;
 import com.ederson.carteira.repository.AdministradoraRepository;
@@ -24,7 +27,13 @@ public class AdministradoraService {
 				.collect(Collectors.toList());
 	}
 	
-	public Administradora incluir(AdministradoraDto administradoraDto) {
+	public Administradora incluir(AdministradoraDto administradoraDto) throws CarteiraException {
+		Administradora administradora2 = administradoraRepository.findByCnpj(administradoraDto.getCnpj());
+		if (Objects.nonNull(administradora2)) {
+			throw new AdministradoraJaCadastradaException(
+					String.format("Administradora com cnpj [%s] já existente", administradoraDto.getCnpj()));
+		}
+
 		Administradora administradora = getAdministradoraFactory().toAdminstradora(administradoraDto);
 		return administradoraRepository.save(administradora);
 	}
