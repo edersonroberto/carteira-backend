@@ -3,7 +3,7 @@ package com.ederson.stockportfolio.dto;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.ederson.stockportfolio.model.Nota;
+import com.ederson.stockportfolio.model.TradeConfirmation;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,17 +14,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetalheAtivoDto {
+public class AssetDetailDto {
 
 	private String ticket;
-	private Long quantidade;
-	private BigDecimal menorPreco;
-	private BigDecimal maiorPreco;
+	private Long amount;
+	private BigDecimal lowerPrice;
+	private BigDecimal highPrice;
 	private BigDecimal custoTotal;
 	private BigDecimal precoMedio;
 	private BigDecimal valorCota;
 	private BigDecimal ganhoRealizado;
 	private BigDecimal ganhoComDividendo;
 	private String tipoAtivo;
-	private List<Nota> notas;
+	private List<TradeConfirmation> notas;
 }

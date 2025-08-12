@@ -1,5 +1,6 @@
 package com.ederson.stockportfolio.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,8 +28,13 @@ public class Access {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name="url")
 	private String url;
-	private String usuario;
-	private String senha;
+	
+	@Column(name="usuario")
+	private String user;
+	
+	@Column(name="senha")
+	private String password;
 
 }

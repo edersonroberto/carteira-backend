@@ -18,43 +18,43 @@ import org.springframework.stereotype.Component;
 import com.ederson.stockportfolio.config.PropertiesConfig;
 import com.ederson.stockportfolio.dto.TicketDto;
 import com.ederson.stockportfolio.model.Asset;
-import com.ederson.stockportfolio.model.Pregao;
-import com.ederson.stockportfolio.service.AtivoService;
-import com.ederson.stockportfolio.service.PregaoService;
+import com.ederson.stockportfolio.model.TradingSession;
+import com.ederson.stockportfolio.service.AssetService;
+import com.ederson.stockportfolio.service.TradingSessionService;
 
 @Component
-public class PregaoSchedule {
+public class TradingSessionSchedule {
 
 	@Autowired
-	AtivoService ativoService;
+	AssetService assetService;
 	
 	@Autowired
-	PregaoService pregaoService;
+	TradingSessionService tradingSessionService;
 	
 	@Autowired
 	private PropertiesConfig properties;
 	
 	@Scheduled(cron = "0 15 9 * * ?")
 	public void executar() {
-		List<TicketDto> tickets = ativoService.listarTickets();
+		List<TicketDto> tickets = assetService.listTickets();
 		
 		tickets.forEach(ticket -> {
-			var object = buscaPregaoAtivo(ticket.getNome());
+			var object = buscaPregaoAtivo(ticket.getName());
 			
-			BigDecimal valorAbertura = new BigDecimal(object.get("vl_abertura").toString());
-			BigDecimal valorFechamento = new BigDecimal(object.get("vl_fechamento").toString());
-			BigDecimal valorMinimo = new BigDecimal(object.get("vl_minimo").toString());
-			BigDecimal valorMaximo = new BigDecimal(object.get("vl_maximo").toString());
+			BigDecimal openingValue = new BigDecimal(object.get("vl_abertura").toString());
+			BigDecimal closingValue = new BigDecimal(object.get("vl_fechamento").toString());
+			BigDecimal minimumValue = new BigDecimal(object.get("vl_minimo").toString());
+			BigDecimal maximumvalue = new BigDecimal(object.get("vl_maximo").toString());
 			String stringData = object.get("dt_pregao").toString();
 			
 			LocalDate data = LocalDate.of(Integer.valueOf(stringData.substring(0, 4)), Integer.valueOf(stringData.substring(4, 6)), Integer.valueOf(stringData.substring(6, 8)));
 			
-			Pregao pregao = Pregao.builder().ativo(new Asset(ticket.getId()))
-					.valorAbertura(valorAbertura).valorFechamento(valorFechamento)
-					.valorMaximo(valorMaximo).valorMinimo(valorMinimo)
-					.dataPregao(data).build();
+			TradingSession pregao = TradingSession.builder().asset(new Asset(ticket.getId()))
+					.openingPrice(openingValue).closingPrice(closingValue)
+					.valorMaximo(maximumvalue).valorMinimo(minimumValue)
+					.tradingSessionDate(data).build();
 			
-			pregaoService.inserir(pregao);
+			tradingSessionService.insert(pregao);
 			
 		});
 	}

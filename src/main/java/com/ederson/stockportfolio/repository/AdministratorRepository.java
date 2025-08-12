@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.ederson.stockportfolio.model.Administrator;
 
 @Repository
-public interface AdministradoraRepository extends JpaRepository<Administrator, Long>{
+public interface AdministratorRepository extends JpaRepository<Administrator, Long>{
 
 	Administrator findByCnpj(String cnpj);
 

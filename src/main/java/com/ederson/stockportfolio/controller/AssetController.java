@@ -12,45 +12,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ederson.stockportfolio.dto.AtivoDto;
-import com.ederson.stockportfolio.dto.DetalheAtivoDto;
+import com.ederson.stockportfolio.dto.AssetDto;
+import com.ederson.stockportfolio.dto.AssetDetailDto;
 import com.ederson.stockportfolio.dto.TicketDto;
-import com.ederson.stockportfolio.exceptions.CarteiraException;
+import com.ederson.stockportfolio.exceptions.StockPortfolioException;
 import com.ederson.stockportfolio.model.Asset;
-import com.ederson.stockportfolio.service.AtivoService;
+import com.ederson.stockportfolio.service.AssetService;
 
 @RestController
-@RequestMapping("/ativos")
-public class AtivoController {
+@RequestMapping("/assets")
+public class AssetController {
 	
 	@Autowired
-	private AtivoService ativoService;
+	private AssetService assetService;
 	
 	@GetMapping()
-	public ResponseEntity<List<Asset>> lista() {
-		return ResponseEntity.ok(ativoService.listar());
+	public ResponseEntity<List<Asset>> list() {
+		return ResponseEntity.ok(assetService.list());
 	}
 	
 	@GetMapping("/{cnpj}")
-	public ResponseEntity<?> detalharAtivo(@PathVariable String cnpj) {
-		DetalheAtivoDto detalheAtivo = ativoService.detalharAtivo(cnpj);
+	public ResponseEntity<?> detailAsset(@PathVariable String cnpj) {
+		AssetDetailDto detalheAtivo = assetService.detailAsset(cnpj);
 		return ResponseEntity.ok(detalheAtivo);
 	}
 	
 	@GetMapping("/carteira")
-	public ResponseEntity<?> detalharCarteira() {
-		List<DetalheAtivoDto> detalheCarteira = ativoService.detalharCarteira();
+	public ResponseEntity<?> detailStockPortfolio() {
+		List<AssetDetailDto> detalheCarteira = assetService.detailStockPortfolio();
 		return ResponseEntity.ok(detalheCarteira);
 	}
 	
 	@GetMapping("/tickets")
-	public List<TicketDto> listaTickets() {
-		return ativoService.listarTickets();
+	public List<TicketDto> listTickets() {
+		return assetService.listTickets();
 	}
 	
 	@PostMapping()
-	public ResponseEntity<?> incluir(@RequestBody AtivoDto ativoDto) throws CarteiraException {
-		Asset ativo = ativoService.incluir(ativoDto);
+	public ResponseEntity<?> incluir(@RequestBody AssetDto ativoDto) throws StockPortfolioException {
+		Asset ativo = assetService.incluir(ativoDto);
 		return ResponseEntity.created(URI.create("/" + ativo.getId())).build();
 	}
 

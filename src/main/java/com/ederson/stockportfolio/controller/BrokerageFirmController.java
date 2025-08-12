@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ederson.stockportfolio.model.BrokerageFirm;
-import com.ederson.stockportfolio.repository.CorretoraRepository;
+import com.ederson.stockportfolio.repository.BrokerageFirmRepository;
 
 @RestController
 @RequestMapping("/corretoras")
-public class CorretoraController {
+public class BrokerageFirmController {
 
 	@Autowired
-	private CorretoraRepository corretoraRepository;
+	private BrokerageFirmRepository brokerageFirmRepository;
 	
 	@GetMapping()
 	public List<BrokerageFirm> lista() {
-		return corretoraRepository.findAll();
+		return brokerageFirmRepository.findAll();
 	}
 }

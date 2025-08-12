@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class AdministratorDto {
 	
-	private String nome;
+	private String name;
 	private String razaoSocial;
 	private String email;
 	private String cnpj;

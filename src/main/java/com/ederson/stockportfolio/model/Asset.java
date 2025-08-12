@@ -32,11 +32,14 @@ public class Asset {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column
+	
+	@Column(name="nome")
 	private String name;
-	@Column
+	
+	@Column(name="ticket")
 	private String ticket;
-	@Column
+	
+	@Column(name="cnpj")
 	private String cnpj;
 	
 	@Enumerated(EnumType.STRING)

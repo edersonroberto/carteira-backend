@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CarteiraResponse {
+public class StockPortfolioResponse {
 	
 	private int code;
 	private String error;

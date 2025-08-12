@@ -22,25 +22,25 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@Table (name = "pregao")
 @Entity
-public class Pregao {
+public class TradingSession {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
-	private Asset ativo; 
+	private Asset asset; 
 	
-	@Column
-	private LocalDate dataPregao;
+	@Column(name="dataPregao")
+	private LocalDate tradingSessionDate;
 	
 	@Column(name = "vl_abertura")
-	private BigDecimal valorAbertura;
+	private BigDecimal openingPrice;
 	
 	@Column(name = "vl_fechamento")
-	private BigDecimal valorFechamento;
+	private BigDecimal closingPrice;
 	
 	@Column(name = "vl_minimo")
 	private BigDecimal valorMinimo;

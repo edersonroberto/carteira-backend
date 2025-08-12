@@ -6,13 +6,13 @@ public enum OperationType {
 	VENDA("VENDA"),
 	DIVIDENDO("DIVIDENDO");
 	
-	private String nome;
+	private String name;
 	
-	private OperationType(String nome) {
-		this.nome = nome;
+	private OperationType(String name) {
+		this.name = name;
 	}
 	
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 }

@@ -2,8 +2,8 @@ package com.ederson.stockportfolio.enums;
 
 public enum AssetType {
 	
-	ACAO(1, "Ação"),
-	FII(2, "Fundo Imobiliario");
+	STOCK(1, "Stock"),
+	REIT(2, "Real Estate Investment Trust");
 	
 	private Integer id;
 	private String descricao;

@@ -17,55 +17,55 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ederson.stockportfolio.config.PropertiesConfig;
 import com.ederson.stockportfolio.dto.DetalheNotaDto;
 import com.ederson.stockportfolio.dto.ListarNotaDto;
-import com.ederson.stockportfolio.dto.NotaDto;
-import com.ederson.stockportfolio.dto.NotaFilter;
+import com.ederson.stockportfolio.dto.TradeConfirmationDto;
+import com.ederson.stockportfolio.dto.TradeConfirmationFilter;
 import com.ederson.stockportfolio.enums.OperationType;
-import com.ederson.stockportfolio.model.Nota;
-import com.ederson.stockportfolio.service.NotaService;
+import com.ederson.stockportfolio.model.TradeConfirmation;
+import com.ederson.stockportfolio.service.TradeConfirmationService;
 
 @RestController
 @RequestMapping("notas")
-public class NotaController {
+public class TradeConfirmationController {
 
 	@Autowired
-	private NotaService notaService;
+	private TradeConfirmationService tradeConfirmationService;
 	
 	@Autowired
 	private PropertiesConfig properties;
 	
 	@GetMapping
-	public List<ListarNotaDto> lista(@RequestParam OperationType operacao) {
-		System.out.println("Tipo Operação: " + operacao.getNome());
+	public List<ListarNotaDto> lista(@RequestParam OperationType operationType) {
+		System.out.println("Tipo Operação: " + operationType.getName());
 		System.out.println(properties.getApiCotacao());
-		return notaService.listar(operacao);
+		return tradeConfirmationService.listar(operationType);
 	}
 	
 	@PostMapping("/filter")
-	public List<ListarNotaDto> filtrar(@RequestBody NotaFilter nota) {
+	public List<ListarNotaDto> filtrar(@RequestBody TradeConfirmationFilter nota) {
 		System.out.println(nota);
-		return notaService.listarNotas(nota);
+		return tradeConfirmationService.listarNotas(nota);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<DetalheNotaDto> detalhar(@PathVariable Long id) {
-		DetalheNotaDto nota = notaService.detalhar(id);
+		DetalheNotaDto nota = tradeConfirmationService.detalhar(id);
 		return ResponseEntity.ok(nota);
 	}
 	
 	@PostMapping
-	public Nota inserir(@RequestBody NotaDto nota) {
+	public TradeConfirmation inserir(@RequestBody TradeConfirmationDto nota) {
 		System.out.println(nota);
-		return notaService.inserir(nota);
+		return tradeConfirmationService.inserir(nota);
 	}
 	
 	@PutMapping("/{id}")
-	public  Nota editarNota(@RequestBody NotaDto notaDto, @PathVariable Long id) {
-	    return notaService.editar(notaDto, id);
+	public  TradeConfirmation editarNota(@RequestBody TradeConfirmationDto notaDto, @PathVariable Long id) {
+	    return tradeConfirmationService.editar(notaDto, id);
 	  }
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> excluir(@PathVariable Long id) {
-		notaService.excluir(id);
+		tradeConfirmationService.excluir(id);
 		return ResponseEntity.ok().build();
 	}
 }

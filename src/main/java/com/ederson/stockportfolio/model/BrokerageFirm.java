@@ -1,5 +1,6 @@
 package com.ederson.stockportfolio.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,8 @@ public class BrokerageFirm {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nome;
+	@Column(name="nome")
+	private String name;
 	
 	public BrokerageFirm(Long id) {
 		this.id = id;

@@ -3,10 +3,10 @@ package com.ederson.stockportfolio.dto;
 import lombok.Data;
 
 @Data
-public class AtivoDto {
+public class AssetDto {
 	
 	private String cnpjAdministrator;
-	private String nome;
+	private String name;
 	private String ticket;
 	private String cnpj;
 

@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ederson.stockportfolio.model.Access;
-import com.ederson.stockportfolio.service.AcessoService;
+import com.ederson.stockportfolio.service.AccessService;
 
 @RestController
 @RequestMapping("/access")
 public class AccessController {
 	
 	@Autowired
-	private AcessoService acessoService;
+	private AccessService accessService;
 	
-	public List<Access> lista() {
-		return acessoService.listar();
+	public List<Access> list() {
+		return accessService.list();
 	}
 	
-	public Access incluir(@RequestBody Access acesso) {
-		return acessoService.incluir(acesso);
+	public Access incluir(@RequestBody Access access) {
+		return accessService.insert(access);
 	}
 
 }

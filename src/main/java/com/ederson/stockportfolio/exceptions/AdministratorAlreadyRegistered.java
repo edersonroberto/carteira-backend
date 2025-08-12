@@ -1,13 +1,13 @@
 package com.ederson.stockportfolio.exceptions;
 
-public class AdministradoraJaCadastradaException extends CarteiraException {
+public class AdministratorAlreadyRegistered extends StockPortfolioException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7561558797298872505L;
 
-	public AdministradoraJaCadastradaException(String message) {
+	public AdministratorAlreadyRegistered(String message) {
 		super(message);
 	}
 }

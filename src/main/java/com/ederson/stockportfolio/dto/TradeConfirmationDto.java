@@ -8,7 +8,7 @@ import com.ederson.stockportfolio.enums.OperationType;
 import lombok.Data;
 
 @Data
-public class NotaDto {
+public class TradeConfirmationDto {
 
 	private Long idAtivo;
 	
@@ -16,11 +16,11 @@ public class NotaDto {
 
 	private LocalDate data;
 
-	private OperationType tipoOperacao;
+	private OperationType operationType;
 
-	private Integer quantidade;
+	private Integer amount;
 
-	private BigDecimal valor;
+	private BigDecimal value;
 	
 	private BigDecimal taxa;
 	
@@ -31,7 +31,7 @@ public class NotaDto {
 	private BigDecimal iss;
 	
 	public BigDecimal getValorTotal() {
-		return this.getValor().multiply(new BigDecimal(this.getQuantidade()));
+		return this.getValue().multiply(new BigDecimal(this.getAmount()));
 	}
 
 	//private BigDecimal taxa;

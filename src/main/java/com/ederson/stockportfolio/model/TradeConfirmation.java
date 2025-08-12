@@ -39,7 +39,7 @@ import lombok.ToString;
 	    name = "pgsql_enum",
 	    typeClass = PostgreSQLEnumType.class
 	)
-public class Nota implements Serializable{
+public class TradeConfirmation implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -66,8 +66,8 @@ public class Nota implements Serializable{
 	@Column(name = "valor")
 	private BigDecimal value;
 	
-	@Column
-	private BigDecimal taxa;
+	@Column(name="taxa")
+	private BigDecimal clearingFee; //taxa de que ??? Liquidação
 	
 	@Column(name="emolumento")
 	private BigDecimal exchangeFee;

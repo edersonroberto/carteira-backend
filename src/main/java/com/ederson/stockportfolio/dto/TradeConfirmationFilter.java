@@ -7,7 +7,7 @@ import com.ederson.stockportfolio.enums.OperationType;
 import lombok.Data;
 
 @Data
-public class NotaFilter {
+public class TradeConfirmationFilter {
 
 	private Long idAtivo;
 	

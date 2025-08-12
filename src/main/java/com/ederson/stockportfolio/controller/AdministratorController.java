@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ederson.stockportfolio.dto.AdministratorDto;
-import com.ederson.stockportfolio.exceptions.CarteiraException;
+import com.ederson.stockportfolio.exceptions.StockPortfolioException;
 import com.ederson.stockportfolio.model.Administrator;
 import com.ederson.stockportfolio.service.AdministratorService;
 
@@ -27,25 +27,25 @@ public class AdministratorController {
 	private AdministratorService administratorService;
 
 	@GetMapping
-	public List<AdministratorDto> lista() {
-		return administratorService.listar();
+	public List<AdministratorDto> list() {
+		return administratorService.list();
 	}
 
 	@GetMapping("/{id}")
 	public AdministratorDto buscaPorId(@PathVariable Long id) {
-		return administratorService.buscaPorId(id);
+		return administratorService.findById(id);
 	}
 
 	@PostMapping
-	public ResponseEntity<?> incluir(@RequestBody AdministratorDto administradoraDto) throws CarteiraException {
-		Administrator administradora = administratorService.incluir(administradoraDto);
-		return ResponseEntity.created(URI.create("/" + administradora.getId())).build();
+	public ResponseEntity<?> insert(@RequestBody AdministratorDto administradoraDto) throws StockPortfolioException {
+		Administrator administrator = administratorService.insert(administradoraDto);
+		return ResponseEntity.created(URI.create("/" + administrator.getId())).build();
 	}
 
 	@DeleteMapping(value = "{cnpj}")
 	@ResponseBody
-	public ResponseEntity<?> excluir(@PathVariable("cnpj") String cnpj) {
-		administratorService.excluir(cnpj);
+	public ResponseEntity<?> delete(@PathVariable("cnpj") String cnpj) {
+		administratorService.delete(cnpj);
 		return ResponseEntity.ok().build();
 	}
 

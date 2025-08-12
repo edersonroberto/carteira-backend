@@ -27,13 +27,17 @@ public class Administrator {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column
-	private String nome;
-	@Column
+	
+	@Column(name="nome")
+	private String name;
+	
+	@Column(name="razaoSocial")
 	private String razaoSocial;
-	@Column
+	
+	@Column(name="email")
 	private String email;
-	@Column
+	
+	@Column(name="cnpj")
 	private String cnpj;
 
 }
