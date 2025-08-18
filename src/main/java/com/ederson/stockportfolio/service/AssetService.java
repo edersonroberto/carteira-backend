@@ -49,14 +49,14 @@ public class AssetService {
 		return list.stream().map(getAtivoFactory()::toTicketDto).collect(Collectors.toList());
 	}
 
-	private AssetFactory getAtivoFactory() {
+	AssetFactory getAtivoFactory() {
 		if (ativoFactory == null) {
 			ativoFactory = new AssetFactory();
 		}
 		return ativoFactory;
 	}
 
-	public Asset incluir(AssetDto ativoDto) throws StockPortfolioException {
+	public Asset insert(AssetDto ativoDto) throws StockPortfolioException {
 		Administrator administrator = administradoraRepository.findByCnpj(ativoDto.getCnpjAdministrator());
 		if (Objects.isNull(administrator)) {
 			throw new AdministratorNotFoundException(
@@ -84,6 +84,7 @@ public class AssetService {
 		ativos.forEach(ativo -> {
 			List<TradeConfirmation> notas = notaRepository.findByAssetCnpj(ativo.getCnpj());
 			if (!notas.isEmpty()) {
+				
 				AssetDetailDto detalheAtivo = getAtivoFactory().toDetalheAtivo(notas);
 				if (detalheAtivo.getAmount() > 0) {	
 					TradingSession ultimoPregao = pregaoService.buscaUltimoPregao(ativo.getId());

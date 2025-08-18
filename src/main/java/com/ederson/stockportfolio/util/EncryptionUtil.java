@@ -4,7 +4,7 @@ import java.util.Base64;
 
 public class EncryptionUtil {
 
-	public static String criptografar(String password) {
+	public static String encrypt(String password) {
 		return new String(Base64.getEncoder().encode(password.getBytes()));
 	}
 

@@ -49,7 +49,7 @@ public class TradeConfirmationService {
 	public TradeConfirmation inserir(TradeConfirmationDto notaDto) {
 		
 		TradeConfirmation notaExistente = notaRepository
-				.findByDataAndValorAndAtivoIdAndCorretoraId(notaDto.getData(), notaDto.getValue()
+				.findByDataAndValueAndAssetIdAndBrokerageFirmId(notaDto.getData(), notaDto.getValue()
 						, notaDto.getIdAtivo(), notaDto.getIdCorretora());
 		
 		if (notaExistente != null) {
@@ -60,7 +60,7 @@ public class TradeConfirmationService {
 		return notaRepository.save(nota);
 	}
 	
-	private TradeConfirmationFactory getNotaFactory(){
+	TradeConfirmationFactory getNotaFactory(){
 		if (notaFactory == null) {
 			notaFactory = new TradeConfirmationFactory();
 		}

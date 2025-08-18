@@ -20,7 +20,7 @@ public interface TradeConfirmationRepository extends JpaRepository<TradeConfirma
 	
 	List<TradeConfirmation> findByBrokerageFirmId(Long idCorretora);
 	
-	TradeConfirmation findByDataAndValorAndAtivoIdAndCorretoraId(LocalDate data, BigDecimal valor, Long idAtivo, Long idCorretora);
+	TradeConfirmation findByDataAndValueAndAssetIdAndBrokerageFirmId(LocalDate data, BigDecimal valor, Long idAtivo, Long idCorretora);
 
 	List<TradeConfirmation> findByOperationType(OperationType operationType, Sort by);
 }

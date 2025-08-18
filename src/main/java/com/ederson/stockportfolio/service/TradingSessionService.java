@@ -17,7 +17,7 @@ public class TradingSessionService {
 	}
 	
 	public TradingSession buscaUltimoPregao(Long ativoId) {
-		return pregaoRepository.findFirstByAtivoIdOrderByDataPregaoDesc(ativoId);
+		return pregaoRepository.findFirstByAssetIdOrderByTradingSessionDateDesc(ativoId);
 	}
 
 }
