@@ -2,9 +2,9 @@ package com.ederson.stockportfolio.enums;
 
 public enum OperationType {
 
-	COMPRA("COMPRA"),
-	VENDA("VENDA"),
-	DIVIDENDO("DIVIDENDO");
+	BUY("Buy"),
+	SALE("Sale"),
+	DIVIDEND("Dividend");
 	
 	private String name;
 	

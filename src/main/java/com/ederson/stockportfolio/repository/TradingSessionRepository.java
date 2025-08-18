@@ -9,6 +9,6 @@ import com.ederson.stockportfolio.model.TradingSession;
 @Repository
 public interface TradingSessionRepository extends JpaRepository<TradingSession, Long>{
 	
-	TradingSession findFirstByAtivoIdOrderByDataPregaoDesc(Long ativoId);
+	TradingSession findFirstByAssetIdOrderByTradingSessionDateDesc(Long ativoId);
 
 }

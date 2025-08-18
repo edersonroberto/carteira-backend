@@ -50,7 +50,7 @@ public class AssetController {
 	
 	@PostMapping()
 	public ResponseEntity<?> incluir(@RequestBody AssetDto ativoDto) throws StockPortfolioException {
-		Asset ativo = assetService.incluir(ativoDto);
+		Asset ativo = assetService.insert(ativoDto);
 		return ResponseEntity.created(URI.create("/" + ativo.getId())).build();
 	}
 

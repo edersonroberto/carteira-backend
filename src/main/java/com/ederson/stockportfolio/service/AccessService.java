@@ -21,8 +21,7 @@ public class AccessService {
 
 	public Access insert(Access access) {
 					
-		String criptografar = EncryptionUtil.criptografar(access.getPassword());
-	
+		String criptografar = EncryptionUtil.encrypt(access.getPassword());
 		access.setPassword(criptografar);
 		return acessoRepository.save(access);
 	}

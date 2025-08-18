@@ -45,13 +45,14 @@ public class TradeConfirmation implements Serializable{
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
 	
 	@ManyToOne
 	private Asset asset;
 	
 	@ManyToOne
-	private BrokerageFirm corretora;
+	private BrokerageFirm brokerageFirm;
 	
 	@Column
 	private LocalDate data;
